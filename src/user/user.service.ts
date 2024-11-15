@@ -6,11 +6,15 @@ import { CreateUserDto } from './dto/create.user.dto';
 export class UserService {
     constructor(private readonly userRepository: UserRepository) {}
 
-    getUser(): string {
-        return this.userRepository.getUser();
+    createUser(createUserDto: CreateUserDto,): string {
+        return this.userRepository.createUser(createUserDto);
     }
 
-    joinUser(createUserDto : CreateUserDto) {
+    getUserInfo(user_id: string) {
+        return this.userRepository.getUserInfo(user_id);
+    }
 
+    deleteUserInfo(user_id: string) {
+        return this.userRepository.deleteUserInfo(user_id);
     }
 }
