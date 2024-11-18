@@ -1,0 +1,16 @@
+services:
+  nestjs-sample-app:
+    image: nestjs-sample
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nestjs-sample
+    restart: no
+    ports:
+      - "3000:3000"
+    healthcheck: 
+      test: ["CMD-SHELL", "curl -f http://localhost:3000/users/ || exit 1"]
+      interval: 30s 
+      timeout: 10s 
+      retries: 3 
+      start_period: 10s

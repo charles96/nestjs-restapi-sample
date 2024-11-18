@@ -1,5 +1,5 @@
 import { Body, Controller, HttpStatus, Res, Delete, Get, NotFoundException, Param, Post, Patch, Query, Put, HttpCode, Header, Logger, LogLevel } from '@nestjs/common';
-import { ApiTags, ApiQuery, ApiOperation, ApiBody, ApiParam } from '@nestjs/swagger';
+import { ApiTags, ApiQuery, ApiOperation, ApiBody, ApiParam, ApiExcludeEndpoint } from '@nestjs/swagger';
 import { Response } from 'express'; 
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create.user.dto';
@@ -50,7 +50,15 @@ export class UserController {
     @ApiParam({ name: 'userId', required: true, type: String, description: '유저 아이디' })
     async deleteUserInfo(
       @Param('userId') user_id : string
-    ):  Promise<void> {
+    ): Promise<void> {
       //return await this.roomService.deleteRoomInfoByRoomId(room_id);
+    }
+
+    @Get()
+    @HttpCode(200)
+    @ApiExcludeEndpoint()
+    async healthCheck(
+    ): Promise<void> {
+
     }
 }

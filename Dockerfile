@@ -4,6 +4,8 @@ WORKDIR /usr/src/app
 
 COPY package.json ./
 
+RUN apk update && apk add --no-cache curl
+
 RUN npm install --legacy-peer-deps
 
 COPY ./ ./

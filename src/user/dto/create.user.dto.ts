@@ -1,6 +1,5 @@
 import { IsString, IsNotEmpty, IsDate, IsInt, IsOptional, IsBoolean } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-//룸 아이디, 룸 생성한 사람, 룸 이름, 룸 생성시간
 
 export class CreateUserDto {
 
