@@ -1,6 +1,8 @@
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
+import { Logger } from './logger/logger.service';
+import { VersioningType } from '@nestjs/common';
 
 const port = 3000
 const options = new DocumentBuilder()
@@ -15,6 +17,9 @@ const options = new DocumentBuilder()
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.enableVersioning({
+    type: VersioningType.URI
+  });
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('help', app, document);
   await app.listen(port);
