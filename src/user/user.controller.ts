@@ -15,8 +15,7 @@ export class UserController {
     @HttpCode(201)
     @ApiOperation({ summary: '유저 생성', description: '유저 정보를 등록한다' })
     @ApiBody({ required: true, type: CreateUserDto, description: '유저 정보' })
-    @ApiResponse
-    ({ 
+    @ApiResponse({ 
         status: 201, 
         description: '유저 생성 성공',
         headers: {
