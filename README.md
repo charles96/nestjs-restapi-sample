@@ -24,6 +24,16 @@ Nestjs RESTful api sample code
 ## 기능
 - 요청 당 x-trace-id 발급 
 - api versioning 추가
+- 공통 에러 응답코드 적용
+```json
+{
+  "code": 404,
+  "timestamp": "2024-12-01T01:03:50.098Z",
+  "path": "/v1/users",
+  "method": "POST",
+  "message": "not found"
+}
+```
 ## Sample endpoints
 |feature|endpoint|method|http status code|description|
 |---|---|---|---|---|
