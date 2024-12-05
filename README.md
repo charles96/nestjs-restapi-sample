@@ -3,37 +3,58 @@
 Nestjs RESTful api sample code
 ```
 .
-├── app.module.ts
-├── filter
-│   └── http.exception.filter.ts
-├── interceptor
-│   └── trace.id.interceptor.ts
-├── logger
-│   └── logger.service.ts
-├── main.ts
-└── user
-    ├── dto
-    │   ├── create.user.dto.ts
-    │   └── update.user.dto.ts
-    ├── user.controller.ts
-    ├── user.module.ts
-    ├── user.repository.ts
-    ├── user.service.ts
-    └── user.swagger.ts
+├── Dockerfile
+├── README.md
+├── docker-compose.yml
+├── nest-cli.json
+├── package-lock.json
+├── package.json
+├── src
+│   ├── app.module.ts
+│   ├── filter
+│   │   └── http.exception.filter.ts
+│   ├── interceptor
+│   │   └── trace.id.interceptor.ts
+│   ├── logger
+│   │   └── logger.service.ts
+│   ├── main.ts
+│   └── user
+│       ├── dto
+│       │   ├── create.user.dto.ts
+│       │   └── update.user.dto.ts
+│       ├── user.controller.ts
+│       ├── user.module.ts
+│       ├── user.repository.ts
+│       └── user.service.ts
+├── test
+│   └── user
+│       └── user.controller.spec.ts
+├── tsconfig.build.json
+└── tsconfig.json
 ```
 ## 기능
-- 요청 당 x-trace-id 발급 
+- 요청 당 x-trace-id 발급
+  * Response headers
+    ```header
+    connection: keep-alive 
+    content-length: 0 
+    date: Thu,05 Dec 2024 03:53:12 GMT 
+    keep-alive: timeout=5 
+    location: /user/string 
+    x-powered-by: Express 
+    x-trace-id: ea36fa59-fac3-4894-8bcb-04d1f24d73d2 
+    ```
 - api versioning 추가
 - 공통 에러 응답코드 적용
-```json
-{
-  "code": 404,
-  "timestamp": "2024-12-01T01:03:50.098Z",
-  "path": "/v1/users",
-  "method": "POST",
-  "message": "not found"
-}
-```
+  ```json
+  {
+    "code": 404,
+    "timestamp": "2024-12-01T01:03:50.098Z",
+    "path": "/v1/users",
+    "method": "POST",
+    "message": "not found"
+  }
+  ```
 ## Sample endpoints
 |feature|endpoint|method|http status code|description|
 |---|---|---|---|---|

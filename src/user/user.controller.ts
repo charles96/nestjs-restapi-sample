@@ -10,7 +10,6 @@ import { version } from 'os';
 @Controller({path:'users', version: '1'})
 export class UserController {
   private readonly logger = new Logger(UserController.name); // Logger 인스턴스 생성
-
   constructor(private readonly userService: UserService) {}
 
   @Post()
@@ -44,8 +43,7 @@ export class UserController {
   ): Promise<void> {
     const traceId = (req as any).traceId;    
     this.logger.debug(`[${this.createUser.name}][${traceId}]`);
-
-    throw new NotFoundException('not found');
+    
     const result = this.userService.createUser(createUserDto);
     res
       .header('Location', `/user/${result}`)

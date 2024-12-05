@@ -8,21 +8,21 @@ export class TraceIdInterceptor implements NestInterceptor {
   private readonly logger = new Logger(TraceIdInterceptor.name);
 
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
-    const response = context.switchToHttp().getResponse();
     const request = context.switchToHttp().getRequest();
-    const traceId = uuidv4(); // UUID를 사용하여 고유한 trace ID 생성
+    const response = context.switchToHttp().getResponse();
+    const className = context.getClass().name;
+    const methodName = context.getHandler().name;
+    const traceId = uuidv4();
 
     response.setHeader('x-trace-id', traceId);
     (request as any).traceId = traceId;
 
-    // 요청 정보와 traceId를 로그에 기록
-    //this.logger.log(`Request to ${request.url} with traceId: ${traceId}`);
+    this.logger.debug(`[${className}][${methodName}][${traceId}][ENTRY]`);
 
-    return next.handle().pipe(
-      tap(() => {
-        // 응답이 완료된 후 추가 로그를 남길 수 있습니다.
-        //this.logger.log(`Response from ${request.url} with traceId: ${traceId}`);
-      }),
-    );
+    return next
+      .handle()
+      .pipe(
+        tap(() => this.logger.debug(`[${className}][${methodName}][${traceId}][ESCAPE]`))
+      );
   }
 }
