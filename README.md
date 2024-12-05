@@ -1,6 +1,9 @@
 # Nestjs RESTful API sample
 ## 개요
 Nestjs RESTful api sample code
+src> domain 폴더로 구분하며 controller, service, repository 레이어를 구분하여 설계.
+* 상호 의존 관계 : controller → service → respository 
+* 각 레이어는 의존은 하되 상호 무관심하게 코딩해야 함!
 ```
 .
 ├── Dockerfile
