@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
-import { Logger } from './logger/logger.service';
+//import { Logger } from './logger/logger.service';
 import { VersioningType } from '@nestjs/common';
 import { TraceIdInterceptor } from './interceptor/trace.id.interceptor';
 import { HttpExceptionFilter } from './filter/http.exception.filter';
@@ -18,7 +18,9 @@ const options = new DocumentBuilder()
   .build();
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    logger: ['debug']
+  });
   app.useGlobalInterceptors(new TraceIdInterceptor());
   app.useGlobalFilters(new HttpExceptionFilter());
   app.enableVersioning({

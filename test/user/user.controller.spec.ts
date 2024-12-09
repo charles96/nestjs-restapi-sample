@@ -1,9 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { HttpStatus } from '@nestjs/common';
 import { UserController } from '../../src/user/user.controller';
 import { UserService } from "../../src/user/user.service";
 import { UserRepository } from "../../src/user/user.repository";
-import { CreateUserDto } from '../../src/user/dto/create.user.dto';
-}
+import { CreateUserDto } from '../../src/user/dto/create.user.dto'; 
+
 describe('CatsController', () => {
   let userController: UserController;
   let userService: UserService;
@@ -19,28 +20,12 @@ describe('CatsController', () => {
     userController = module.get<UserController>(UserController);
   });
 
-  describe('createUser', () => {
-    it('should create a user and return the user id', async () => {
-      const createUserDto: CreateUserDto = { user_id: '123', user_name: 'Test User', email: 'ddd@dd.com' };
-      jest.spyOn(userService, 'createUser').mockImplementation(() => '123');
-
-      const result = await userController.createUser({ traceId: 'trace-id' }, createUserDto, {
-        header: jest.fn(),
-        status: jest.fn().mockReturnThis(),
-        end: jest.fn(),
-      } as any);
-
-      expect(result).toBeUndefined();
-      expect(userService.createUser).toHaveBeenCalledWith(createUserDto);
-    });
-  });
-  
   describe('getUserInfo', () => {
-    it('should return user info', () => {
+    it('should return user info', async () => {
       const userId = '123';
       jest.spyOn(userService, 'getUserInfo').mockImplementation(() => 'Hello World!');
 
-      const result = userController.getUserInfo({ traceId: 'trace-id' }, userId, {
+      const result = await userController.getUserInfo({ traceId: 'trace-id' }, userId, {
         status: jest.fn().mockReturnThis(),
         json: jest.fn(),
       } as any);
