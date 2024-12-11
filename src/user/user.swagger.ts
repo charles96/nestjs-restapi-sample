@@ -1,7 +1,13 @@
 import { applyDecorators } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiBody, ApiHeader, ApiResponse, ApiParam } from '@nestjs/swagger';
+import { ApiTags, ApiExcludeEndpoint, ApiOperation, ApiBody, ApiHeader, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { CreateUserDto } from './dto/create.user.dto';
 import { UpdateUserDto } from './dto/update.user.dto';
+
+export function UserControllerSwagger() {
+    return applyDecorators(
+        ApiTags('User')
+    );
+}
 
 export function CreateUserSwagger() {
   return applyDecorators(
@@ -64,7 +70,7 @@ export function GetUserInfoSwagger() {
                 example: '4f535ba4-1e2c-45ba-a7f6-16bd0ebe6ec3'
               }
             }
-          }
+        }
         })
     );
 }
@@ -125,5 +131,11 @@ export function DeleteUserInfoSwagger() {
             }
           }
         })
+    );
+}
+
+export function HealthCheckSwagger(){
+    return applyDecorators(
+        ApiExcludeEndpoint()
     );
 }

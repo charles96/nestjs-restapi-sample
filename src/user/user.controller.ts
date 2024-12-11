@@ -1,13 +1,12 @@
 import { Headers, Request, Body, Controller, HttpStatus, Res, Delete, Get, NotFoundException, Param, Post, Patch, Query, Put, HttpCode, Header, Logger, LogLevel } from '@nestjs/common';
-import { ApiTags, ApiExcludeEndpoint } from '@nestjs/swagger';
-import { CreateUserSwagger, GetUserInfoSwagger, UpdateUserInfoSwagger, DeleteUserInfoSwagger } from './user.swagger';
+import { UserControllerSwagger, CreateUserSwagger, GetUserInfoSwagger, UpdateUserInfoSwagger, DeleteUserInfoSwagger, HealthCheckSwagger } from './user.swagger';
 import { Response } from 'express'; 
 import { BaseController } from 'src/base.controller';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create.user.dto';
 import { UpdateUserDto } from './dto/update.user.dto';
 
-@ApiTags('User')
+@UserControllerSwagger()
 @Controller({path:'users', version: '1'})
 export class UserController extends BaseController {
   constructor(private readonly userService: UserService) {
@@ -87,7 +86,7 @@ export class UserController extends BaseController {
 
   @Get()
   @HttpCode(200)
-  @ApiExcludeEndpoint()
+  @HealthCheckSwagger()
   async healthCheck(
     @Res() res: Response
   ): Promise<void> {
