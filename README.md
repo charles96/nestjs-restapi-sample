@@ -2,7 +2,7 @@
 ## 개요
 Nestjs RESTful api sample code
 * src> domain 단위 폴더
-* controller, service, repository 레이어
+* swagger, controller, service, repository 레이어
 * 각 레이어는 상호 무관심하게 코딩해야 함!
 ```
 .
@@ -28,7 +28,8 @@ Nestjs RESTful api sample code
 │       ├── user.controller.ts
 │       ├── user.module.ts
 │       ├── user.repository.ts
-│       └── user.service.ts
+│       ├── user.service.ts
+│       └── user.swagger.ts
 ├── test
 │   └── user
 │       └── user.controller.spec.ts
