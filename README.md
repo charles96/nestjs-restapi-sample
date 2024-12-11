@@ -35,20 +35,31 @@ Nestjs RESTful api sample code
 ├── tsconfig.build.json
 └── tsconfig.json
 ```
-## 기능
-- 요청 당 x-trace-id 발급
-  * Response headers
-    ```header
-    connection: keep-alive 
-    content-length: 0 
-    date: Thu,05 Dec 2024 03:53:12 GMT 
-    keep-alive: timeout=5 
-    location: /user/string 
-    x-powered-by: Express 
-    x-trace-id: ea36fa59-fac3-4894-8bcb-04d1f24d73d2 
-    ```
-- api versioning 추가
-- 공통 에러 응답코드 적용
+## 기능 적용 사항
+### x-trace-id 추적 코드 적용
+  ``` Request Header
+  curl -X 'POST' \
+  'http://localhost:3000/v1/users' \
+  -H 'accept: */*' \
+  -H 'x-trace-id: 4f535ba4-1e2c-45ba-a7f6-16bd0ebe6ec3' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "user_id": "string",
+  "user_name": "string",
+  "email": "string"
+  }'
+  ```
+  ```Response headers
+  connection: keep-alive 
+  content-length: 0 
+  date: Wed,11 Dec 2024 03:04:39 GMT 
+  keep-alive: timeout=5 
+  location: /user/string 
+  x-powered-by: Express 
+  x-trace-id: 4f535ba4-1e2c-45ba-a7f6-16bd0ebe6ec3 
+  ```
+### api versioning 추가
+### 공통 에러 응답코드 적용
   ```json
   {
     "code": 404,
