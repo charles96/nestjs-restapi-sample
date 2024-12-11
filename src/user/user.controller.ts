@@ -4,7 +4,6 @@ import { Response } from 'express';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create.user.dto';
 import { UpdateUserDto } from './dto/update.user.dto';
-import { version } from 'os';
 
 @ApiTags('User')
 @Controller({path:'users', version: '1'})
@@ -13,6 +12,7 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
+  @Version('2') 
   @HttpCode(201)
   @ApiOperation({ summary: '유저 생성', description: '유저 정보를 등록한다' })
   @ApiBody({ required: true, type: CreateUserDto, description: '유저 정보' })

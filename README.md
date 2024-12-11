@@ -59,6 +59,16 @@ Nestjs RESTful api sample code
   x-trace-id: 4f535ba4-1e2c-45ba-a7f6-16bd0ebe6ec3 
   ```
 ### api versioning 추가
+  ```typescript
+  @ApiTags('User')
+  @Controller({path:'users', version: '1'})
+  export class UserController { }
+  ...
+
+  @Post()
+  @Version('2')  //메소드 버저닝
+  @HttpCode(201)
+  ```
 ### 공통 에러 응답코드 적용
   ```json
   {
