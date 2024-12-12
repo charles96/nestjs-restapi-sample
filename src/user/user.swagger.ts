@@ -16,7 +16,7 @@ export function CreateUserSwagger() {
     ApiBody({ required: true, type: CreateUserDto, description: '유저 정보' }),
     ApiHeader({
       name: 'x-trace-id',
-      description: '요청 추적 ID (옵셔널)',
+      description: '요청 추적 ID',
       required: false,
       schema: {
         type: 'string',
